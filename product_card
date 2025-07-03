@@ -1,0 +1,87 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:product_project/model/product_model.dart';
+
+class ProductCard extends StatefulWidget {
+  const ProductCard({super.key, required this.model});
+
+  final ProductModel model;
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+
+  late bool isFavorite;
+
+  @override
+  void initState(){
+    super.initState();
+    isFavorite = widget.model.isFavorite;
+  }
+
+  void toggleFavorite(){
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Material(
+      color: Colors.grey.shade200,
+      borderRadius: BorderRadius.circular(20),
+      shadowColor: Colors.deepPurple,
+      elevation: 3,
+      child: Column(
+        children: [
+          Expanded(
+            child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+              child: Stack(
+                children: [
+                  Image(
+                      height: 150,
+                      width: double.infinity,
+                      image: NetworkImage(widget.model.picture),
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    top: 8,
+                      right: 8,
+                      child: GestureDetector(
+                        onTap: toggleFavorite,
+                        child: Icon(
+                          isFavorite
+                          ? CupertinoIcons.heart_fill
+                              : CupertinoIcons.heart,
+                          color: Colors.red,
+                        ),
+                      )
+                  ),
+                ],
+              ),
+          ),
+          ),
+          Text(widget.model.name),
+          Text(widget.model.details),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              margin: const EdgeInsets.all(4),
+              child: Text(widget.model.price),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
