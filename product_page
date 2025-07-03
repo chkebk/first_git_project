@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'package:product_project/model/product_model.dart';
+import 'package:product_project/product_details.dart';
+
+class ProductPage extends StatefulWidget {
+  const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  List<ProductModel> productLists = [
+    ProductModel(
+        picture: 'https://shorturl.at/ME7rO',
+        name: 'Sweat Shirt',
+        price: '3000',
+        details: 'This cloth fits all'
+    ),
+    ProductModel(
+        picture: 'https://shorturl.at/uvnf2',
+        name: 'American Ninja ',
+        price: '9000',
+        details: ''
+    ),
+    ProductModel(
+        picture: 'https://www.freepik.com/premium-ai-image/png-brick-wall-architecture-standing_413980853.htm#fromView=search&page=1&position=38&uuid=1d3829aa-dd9f-4b7a-9ea1-f7fc024ff983&query=Man+Fashion+Png',
+        name: 'German Sweater',
+        price: '4000',
+        details: 'Sweater fits for all',
+    ),
+    ProductModel(
+        picture: 'https://www.freepik.com/premium-ai-image/png-young-american-african-man-fashion-sleeve-adult_414137633.htm#fromView=keyword&page=1&position=43&uuid=4d2b0fc5-6116-426c-8c96-652a64ec0384&query=Fashion+Png',
+        name: '',
+        price: '1300',
+      details: 'The Cloth everyone looks for',
+    ),
+    ProductModel(
+        picture: 'https://www.freepik.com/ai#from_element=resource_detail',
+        name: 'Free Cloth',
+        price: 'Free',
+        details: 'This is free',
+    ),
+
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+        ),
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProductDetails(
+                model: productLists[index],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
