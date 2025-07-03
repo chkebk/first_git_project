@@ -1,0 +1,15 @@
+class ProductModel {
+  final String picture;
+  final String name;
+  final String price;
+  final String details;
+  bool isFavorite;
+
+  ProductModel({
+    required this.picture,
+    required this.name,
+    required this.price,
+    required this.details,
+    this.isFavorite = false,
+  });
+}
