@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:product_project/model/product_model.dart';
+
+class ProductDetails extends StatelessWidget {
+
+  final ProductModel model;
+
+  const ProductDetails({super.key, required this.model});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(model.name),),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Image.network(model.picture, width: double.infinity, height: 250, fit: BoxFit.cover,),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(model.name, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                SizedBox(height: 8,),
+                Text(model.details, style: TextStyle(fontSize: 20, color: Colors.green),),
+                SizedBox(height: 16,),
+                Text('₦${model.price}', style: TextStyle(fontSize: 20, color: Colors.green),),
+                SizedBox(height: 16,),
+                Text('Favorite Status: YES/NO', style: TextStyle(fontSize: 20, color: Colors.black),)
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
